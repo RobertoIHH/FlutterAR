@@ -13,7 +13,6 @@ import 'package:ar_flutter_plugin/models/ar_anchor.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
-import 'dart:typed_data';
 
 void main() {
   runApp(const MyApp());
@@ -50,7 +49,6 @@ class _ARModelViewerState extends State<ARModelViewer> {
   ARLocationManager? arLocationManager;
 
   List<ARNode> nodes = [];
-  Uint8List? modelData;
   String? modelPath;
   bool isModelLoaded = false;
 
@@ -159,9 +157,8 @@ class _ARModelViewerState extends State<ARModelViewer> {
     this.arSessionManager!.onInitialize(
       showFeaturePoints: false,
       showPlanes: true,
+      customPlaneTexturePath: null,
       showWorldOrigin: false,
-      handlePans: true,
-      handleRotation: true,
     );
 
     this.arObjectManager!.onInitialize();
@@ -221,7 +218,7 @@ class _ARModelViewerState extends State<ARModelViewer> {
 
     // Colocar el modelo en el centro de la vista
     var newNode = ARNode(
-      type: NodeType.fileSystemAppFolderGLB2,
+      type: NodeType.localGLTF2,
       uri: modelPath!,
       scale: vector.Vector3(0.2, 0.2, 0.2),
       position: vector.Vector3(0.0, 0.0, -1.0),
@@ -246,7 +243,7 @@ class _ARModelViewerState extends State<ARModelViewer> {
 
     if (didAddAnchor == true) {
       var newNode = ARNode(
-        type: NodeType.fileSystemAppFolderGLB2,
+        type: NodeType.localGLTF2,
         uri: modelPath!,
         scale: vector.Vector3(0.2, 0.2, 0.2),
         position: hitTestResult.worldTransform.getTranslation(),
