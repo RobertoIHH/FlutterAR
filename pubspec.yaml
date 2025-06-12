@@ -1,0 +1,31 @@
+name: app_ar
+description: A new Flutter AR application.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Dependencias para AR
+  ar_flutter_plugin: ^0.7.3
+  permission_handler: ^11.0.1
+  file_picker: ^6.1.1
+
+  # UI
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Aquí puedes agregar tus modelos 3D
+  assets:
+    - assets/models/
